@@ -9,6 +9,10 @@ class App extends Component {
     console.log(this.state);
   }
 
+  addCard = (id, listIndex)= {};
+
+  deleteCard = (id, listIndex) => {console.log(asda)};
+
 
   static defaultProps = {
     store: {
