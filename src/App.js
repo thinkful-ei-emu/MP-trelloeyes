@@ -9,7 +9,6 @@ class App extends Component {
     console.log(this.state);
   }
 
-
   static defaultProps = {
     store: {
       lists: [],
@@ -17,6 +16,14 @@ class App extends Component {
     }
   };
 
+  deleteCard = (CardId, ListId) => {
+    console.log('deleteCard')
+    console.log('card: ', CardId, ' list: ', ListId)
+  };
+
+  addRandomCard = (ListId) => {
+    console.log(ListId)
+  };
 
   render() {
     const { store } = this.props
@@ -31,6 +38,9 @@ class App extends Component {
               key={list.id}
               header={list.header}
               cards={list.cardIds.map(id => store.allCards[id])}
+              deleteCard={this.deleteCard}
+              ListId={list.id}
+              addRandomCard={this.addRandomCard}
             />
           ))}
         </div>
