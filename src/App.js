@@ -16,7 +16,7 @@ class App extends Component {
     }
   };
 
-  deleteCard = (CardId, ListId) => {
+  deleteCard = (CardId) => {
   const aC = {...this.state.allCards}
   delete aC[CardId];
   console.log(aC);
@@ -29,13 +29,63 @@ class App extends Component {
         }
       }),
       allCards: aC,
-
     })
   };
 
+  generateRandomCard() {
+    const id = Math.random().toString(36).substring(2, 4)
+    + Math.random().toString(36).substring(2, 4);
+    return {
+      id,
+      title: `Random Card ${id}`,
+      content: 'lorem ipsum',
+    }
+  }
+
   addRandomCard = (ListId) => {
-    console.log(ListId)
+    const rC = this.generateRandomCard();
+    const rCkey = rC.id;
+    const newAllCards = 
+    { 
+      ...this.state.allCards, 
+    }
+    newAllCards[rCkey] = rC 
+
+    if(rC.id in this.state.allCards) {
+      this.setState({
+        lists: this.state.lists.map((list) => {
+          return ListId === list.id ? 
+          {
+            id: list.id,
+            header: list.header,
+            cardIds: [...list.cardIds, rC.id] 
+          } : {
+            id: list.id, 
+            header: list.header, 
+            cardIds: list.cardIds
+          }
+        })
+      }) 
+    } else{
+      this.setState({
+        lists: this.state.lists.map((list) => {
+          return ListId === list.id ? 
+          {
+            id: list.id,
+            header: list.header,
+            cardIds: [...list.cardIds, rC.id] 
+          } : {
+            id: list.id, 
+            header: list.header, 
+            cardIds: list.cardIds
+          }
+        }),
+        allCards: newAllCards
+      })
+    } 
   };
+
+
 
   render() {
     console.log(this.state);
