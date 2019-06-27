@@ -3,12 +3,20 @@ import List from './List'
 import './App.css';
 
 class App extends Component {
+  constructor(props){
+    super(props)
+    this.state=props;
+    console.log(this.state);
+  }
+
+
   static defaultProps = {
     store: {
       lists: [],
       allCards: {},
     }
   };
+
 
   render() {
     const { store } = this.props
